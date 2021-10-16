@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/fontawesome5-overrides.min.css')}}">
+    
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/css/theme.bootstrap_4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.min.css')}}">
+</head>
+
+<body>
+    {% if message %}
+    <div class="alert alert-{{ tag }} alert-dismissible fade show" role="alert">
+        <strong>Message: </strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endif %}
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <!-- Start: Signup page with overlay -->
+        <div id="main-wrapper" class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10">
+                    <div class="card border-0">
+                        <div class="card-body p-0">
+                            <div class="row no-gutters">
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <div class="mb-5">
+                                            <h3 class="h4 font-weight-bold text-theme">Register</h3>
+                                        </div>
+                                        <h6 class="h5 mb-0">Just Do Register.</h6>
+					  <p class="text-muted mt-2 mb-5">If You Really Want To Know, Look In The
+					   Register.</p>
+                                        <form method="POST" action="/signup">
+                                            <div class="form-group">
+                                                <label for="yourName">Username</label>
+                                                <input type="text" class="form-control" name="username" id="yourName" required pattern="[A-Za-z]{3,32}" title="Name should atleast contain more than two characters and no numbers" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email address</label>
+                                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                                                    required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleAddress">Address</label>
+                                                <input type="text" name="address" class="form-control" id="exampleAddress" required pattern="[A-Za-z0-9'\.\-\s\,]" title="Enter a valid address" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Password</label>
+                                                <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                                    required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" title="Password must contain Minimum eight characters, at least one letter, one number and one special character"/>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="exampleInputPassword2">Confirm Password </label>
+                                                <input type="password" class="form-control" id="exampleInputPassword2"
+                                                    required />
+                                            </div>
+                                            <input class="form-group mb-5" type="checkbox" onclick="showPassword()">Show
+                                            Password
+                                            <br>
+                                            <button type="submit" class="btn btn-theme"
+                                                onclick="return Validate()">Register</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-none d-lg-inline-block">
+                                    <div class="account-block rounded-right">
+                                        <div class="overlay rounded-right"></div>
+                                        <div class="account-testimonial">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+                    <p class="text-muted text-center mt-3 mb-0">Already have an account? <a href="/login/"
+                            class="text-primary ml-1">login</a></p>
+                    <!-- end row -->
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- Row -->
+        </div><!-- End: Signup page with overlay -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-filter.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/widgets/widget-storage.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{ url_for('static', path='/script.min.js')}}"></script>
+    <script type="text/javascript">
+        function Validate() {
+            var password = document.getElementById("exampleInputPassword1").value;
+            var confirmPassword = document.getElementById("exampleInputPassword2").value;
+            if (password != confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+        function showPassword() {
+            var x = document.getElementById("exampleInputPassword1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</body>
+
+</html>
